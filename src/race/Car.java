@@ -1,16 +1,20 @@
 package race;
 
 import java.security.cert.Extension;
+import java.util.concurrent.CountDownLatch;
 
 public class Car implements Runnable {
     private static int CARS_COUNT;
+    private static int CARS_UNREADY;
     static {
         CARS_COUNT = 0;
+        CARS_UNREADY = 0;
     }
 
     private Race race;
     private int speed;
     private String name;
+
 
     public String getName() {
         return name;
@@ -24,6 +28,8 @@ public class Car implements Runnable {
         this.race = race;
         this.speed = speed;
         CARS_COUNT++;
+        CARS_UNREADY++;
+
         this.name = "Участник #" + CARS_COUNT;
     }
 
